@@ -151,6 +151,7 @@ export default function request(
       }
       if (status >= 404 && status < 422) {
         // router.push('/exception/404');
+        // router.push('/user/login');
         router.push('/user/login');
       }
     });
