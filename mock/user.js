@@ -49,6 +49,7 @@ export default {
     },
     address: '西湖区工专路 77 号',
     phone: '0752-268888888',
+    status: 'ok',
   },
   // GET POST 可省略
   'GET /api/users': [
@@ -78,6 +79,7 @@ export default {
         status: 'ok',
         type,
         currentAuthority: 'admin',
+        token: 'qwerqwer',
       });
       return;
     }
@@ -86,6 +88,7 @@ export default {
         status: 'ok',
         type,
         currentAuthority: 'user',
+        token: 'asdfasdf',
       });
       return;
     }

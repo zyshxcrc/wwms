@@ -22,6 +22,7 @@ export default {
       // Login successfully
       if (response.status === 'ok') {
         reloadAuthorized();
+        localStorage.setItem('token', response.token);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
