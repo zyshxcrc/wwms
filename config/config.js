@@ -41,6 +41,7 @@ export default {
       },
     ],
   ],
+  history: 'hash',
   define: {
     APP_TYPE: process.env.APP_TYPE || '',
   },
@@ -94,13 +95,13 @@ export default {
       },
     ],
   },
-  proxy: {
-    '/api': {
-      target: 'http://localhost:8001/',
-      changeOrigin: true,
-      pathRewrite: { '^/api': '' },
-    },
-  },
+  // proxy: {
+  //   '/api': {
+  //     target: 'https://preview.pro.ant.design/',
+  //     changeOrigin: true,
+  //     pathRewrite: { '^/api': 'api' },
+  //   },
+  // },
 
   chainWebpack: webpackplugin,
   cssnano: {
