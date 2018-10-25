@@ -47,6 +47,18 @@ export default [
         icon: 'dashboard',
         component: './Orders/Orders',
       },
+      {
+        path: '/permission',
+        name: 'Orders',
+        icon: 'dashboard',
+        routes: [
+          {
+            path: '/permission/users',
+            name: 'Users',
+            component: './Permissions/Users',
+          },
+        ],
+      },
       // forms
       {
         path: '/form',
