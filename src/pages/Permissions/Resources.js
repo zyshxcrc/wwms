@@ -283,15 +283,15 @@ class Resources extends PureComponent {
 
   columns = [
     {
-      title: '姓名',
+      title: '资源名称',
       dataIndex: 'name',
     },
     {
-      title: '年龄',
+      title: '别称',
       dataIndex: 'age',
     },
     {
-      title: '地址',
+      title: '描述',
       dataIndex: 'address',
     },
     {

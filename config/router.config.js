@@ -44,13 +44,13 @@ export default [
       {
         path: '/Orders',
         name: 'Orders',
-        icon: 'dashboard',
+        icon: 'ordered-list',
         component: './Orders/Orders',
       },
       {
         path: '/permission',
         name: 'Permission',
-        icon: 'dashboard',
+        icon: 'setting',
         routes: [
           {
             path: '/permission/users',

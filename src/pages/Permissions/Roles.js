@@ -20,6 +20,7 @@ import {
   Divider,
   Steps,
   Radio,
+  Popconfirm,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -331,7 +332,15 @@ class Roles extends PureComponent {
         <Fragment>
           <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
           <Divider type="vertical" />
-          <a href="">订阅警报</a>
+          <Popconfirm
+            title="Are you sure delete this task?"
+            onConfirm={() => this.confirm()}
+            onCancel={() => this.cancel()}
+            okText="Yes"
+            cancelText="No"
+          >
+            <a href="#">删除</a>
+          </Popconfirm>
         </Fragment>
       ),
     },
@@ -343,6 +352,14 @@ class Roles extends PureComponent {
       type: 'roles/fetch',
     });
   }
+
+  confirm = e => {
+    console.log(e);
+  };
+
+  cancel = e => {
+    console.log(e);
+  };
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
     const { dispatch } = this.props;
