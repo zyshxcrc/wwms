@@ -21,6 +21,7 @@ import {
   Steps,
   Radio,
   Popconfirm,
+  Tree,
 } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -32,6 +33,7 @@ const { Step } = Steps;
 const { TextArea } = Input;
 const { Option } = Select;
 const RadioGroup = Radio.Group;
+const TreeNode = Tree.TreeNode;
 const getValue = obj =>
   Object.keys(obj)
     .map(key => obj[key])
@@ -39,31 +41,166 @@ const getValue = obj =>
 const statusMap = ['default', 'processing', 'success', 'error'];
 const status = ['关闭', '运行中', '已上线', '异常'];
 
-const CreateForm = Form.create()(props => {
-  const { modalVisible, form, handleAdd, handleModalVisible } = props;
-  const okHandle = () => {
-    form.validateFields((err, fieldsValue) => {
+// const CreateForm = Form.create()(props => {
+//   const { modalVisible, form, handleAdd, handleModalVisible } = props;
+//   const okHandle = () => {
+//     form.validateFields((err, fieldsValue) => {
+//       if (err) return;
+//       form.resetFields();
+//       console.info(fieldsValue)
+//       handleAdd(fieldsValue);
+//     });
+//   };
+//   function handleConfirmPassword(rule, value, callback) {
+//     // const { getFieldValue } = this.props.form
+//     // if (value && value !== getFieldValue('newPassword')) {
+//     //   callback('两次输入不一致！')
+//     // }
+//
+//     // Note: 必须总是返回一个 callback，否则 validateFieldsAndScroll 无法响应
+//     callback()
+//   }
+//   function normFile (e){
+//     console.log('Upload event:', e);
+//     if (Array.isArray(e)) {
+//       return e;
+//     }
+//     return e && e.fileList;
+//   }
+//   return (
+//     <Modal
+//       destroyOnClose
+//       title="新建角色"
+//       visible={modalVisible}
+//       onOk={okHandle}
+//       onCancel={() => handleModalVisible()}
+//     >
+//       <Form layout="inline">
+//         <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="角色名称">
+//           {form.getFieldDecorator('name', {
+//             rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
+//           })(<Input placeholder="请输入" />)}
+//         </FormItem>
+//         <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="角色描述">
+//           {form.getFieldDecorator('desc', {
+//             rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
+//           })(<Input placeholder="请输入" />)}
+//         </FormItem>
+//         <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="资源">
+//           {form.getFieldDecorator('resources', {
+//             valuePropName: 'fileList',
+//             getValueFromEvent: this.normFile,
+//             // rules: [{ validator: handleConfirmPassword }],
+//           })(<Tree
+//             checkable
+//             defaultExpandedKeys={['0-0-0', '0-0-1']}
+//             defaultSelectedKeys={['0-0-0', '0-0-1']}
+//             defaultCheckedKeys={['0-0-0', '0-0-1']}
+//             // onSelect={this.onSelect}
+//             // onCheck={this.onCheck}
+//           >
+//             <TreeNode title="parent 1" key="0-0">
+//               <TreeNode title="parent 1-0" key="0-0-0" disabled>
+//                 <TreeNode title="leaf" key="0-0-0-0" disableCheckbox />
+//                 <TreeNode title="leaf" key="0-0-0-1" />
+//               </TreeNode>
+//               <TreeNode title="parent 1-1" key="0-0-1">
+//                 <TreeNode title={<span style={{ color: '#1890ff' }}>sss</span>} key="0-0-1-0" />
+//               </TreeNode>
+//             </TreeNode>
+//           </Tree>)}
+//         </FormItem>
+//       </Form>
+//     </Modal>
+//   );
+// });
+
+@Form.create()
+class CreateForm extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      checkedKeys: [],
+    };
+
+    this.formLayout = {
+      labelCol: { span: 7 },
+      wrapperCol: { span: 13 },
+    };
+  }
+
+  onCheck = checkedKeys => {
+    console.log('onSelect', checkedKeys);
+    this.setState({ checkedKeys });
+  };
+
+  okHandle = () => {
+    this.props.form.validateFields((err, fieldsValue) => {
       if (err) return;
-      form.resetFields();
-      handleAdd(fieldsValue);
+      // this.props.form.resetFields();
+      const payload = {
+        ...fieldsValue,
+        resources: this.state.checkedKeys,
+      };
+      console.info(payload);
+      // handleAdd(fieldsValue);
     });
   };
-  return (
-    <Modal
-      destroyOnClose
-      title="新建规则"
-      visible={modalVisible}
-      onOk={okHandle}
-      onCancel={() => handleModalVisible()}
-    >
-      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="描述">
-        {form.getFieldDecorator('desc', {
-          rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
-        })(<Input placeholder="请输入" />)}
-      </FormItem>
-    </Modal>
-  );
-});
+
+  render() {
+    const { modalVisible, form, handleAdd, handleModalVisible } = this.props;
+    return (
+      <Modal
+        destroyOnClose
+        title="新建角色"
+        visible={modalVisible}
+        onOk={this.okHandle}
+        onCancel={() => handleModalVisible()}
+      >
+        <Form>
+          <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="角色名称">
+            {form.getFieldDecorator('name', {
+              rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+          <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="角色描述">
+            {form.getFieldDecorator('desc', {
+              rules: [{ required: true, message: '请输入至少五个字符的规则描述！', min: 5 }],
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+        </Form>
+        <Row>
+          <Col offset={1}>
+            <span>资源列表：</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col offset={1}>
+            <Tree
+              checkable
+              defaultExpandedKeys={['0-0-0', '0-0-1']}
+              defaultSelectedKeys={['0-0-0', '0-0-1']}
+              defaultCheckedKeys={['0-0-0', '0-0-1']}
+              // onChange={this.onChange}
+              onCheck={this.onCheck}
+            >
+              <TreeNode title="parent 1" key="0-0">
+                <TreeNode title="parent 1-0" key="0-0-0" disabled>
+                  <TreeNode title="leaf" key="0-0-0-0" disableCheckbox />
+                  <TreeNode title="leaf" key="0-0-0-1" />
+                </TreeNode>
+                <TreeNode title="parent 1-1" key="0-0-1">
+                  <TreeNode title={<span style={{ color: '#1890ff' }}>sss</span>} key="0-0-1-0" />
+                </TreeNode>
+              </TreeNode>
+            </Tree>
+          </Col>
+        </Row>
+      </Modal>
+    );
+  }
+}
 
 @Form.create()
 class UpdateForm extends PureComponent {
