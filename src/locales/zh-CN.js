@@ -25,6 +25,7 @@ export default {
   'menu.Permission': '权限',
   'menu.Permission.Users': '用户',
   'menu.Permission.Roles': '角色',
+  'menu.Permission.Resources': '资源',
   'menu.form': '表单页',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',

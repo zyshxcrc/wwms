@@ -62,6 +62,11 @@ export default [
             name: 'Roles',
             component: './Permissions/Roles',
           },
+          {
+            path: '/permission/resources',
+            name: 'Resources',
+            component: './Permissions/Resources',
+          },
         ],
       },
       // forms

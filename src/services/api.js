@@ -132,3 +132,7 @@ export async function getPermissionUsers() {
 export async function getPermissionRoles() {
   return request('/api/permission/roles');
 }
+
+export async function getPermissionResources() {
+  return request('/api/permission/resources');
+}

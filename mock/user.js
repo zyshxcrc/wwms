@@ -148,6 +148,44 @@ export default {
 
     return res.json(result);
   },
+  'GET /api/permission/resources': (req, res) => {
+    const resources = [
+      {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+        password: '123',
+        status: 1,
+      },
+      {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+        password: '123',
+        status: 1,
+      },
+      {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        password: '123',
+        status: 1,
+      },
+    ];
+    const result = {
+      list: resources,
+      pagination: {
+        total: 10,
+        pageSize: 5,
+        current: 1,
+      },
+    };
+
+    return res.json(result);
+  },
   'POST /api/login/account': (req, res) => {
     const { password, userName, type } = req.body;
     if (password === '888888' && userName === 'admin') {
