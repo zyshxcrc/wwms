@@ -49,13 +49,18 @@ export default [
       },
       {
         path: '/permission',
-        name: 'Orders',
+        name: 'Permission',
         icon: 'dashboard',
         routes: [
           {
             path: '/permission/users',
             name: 'Users',
             component: './Permissions/Users',
+          },
+          {
+            path: '/permission/roles',
+            name: 'Roles',
+            component: './Permissions/Roles',
           },
         ],
       },

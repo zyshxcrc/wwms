@@ -128,3 +128,7 @@ export async function getFakeCaptcha(mobile) {
 export async function getPermissionUsers() {
   return request('/api/permission/users');
 }
+
+export async function getPermissionRoles() {
+  return request('/api/permission/roles');
+}
