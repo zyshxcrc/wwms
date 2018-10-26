@@ -47,6 +47,7 @@ const progressColumns = [
 }))
 class BasicProfile extends Component {
   componentDidMount() {
+    console.info(this.props.location.state);
     const { dispatch } = this.props;
     dispatch({
       type: 'profile/fetchBasic',

@@ -9,6 +9,8 @@ import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { formatWan } from '@/utils/utils';
 
 import styles from './Orders.less';
+import { routerRedux } from 'dva/router';
+import { stringify } from 'qs';
 
 const { Option } = Select;
 const FormItem = Form.Item;
@@ -42,6 +44,26 @@ class Orders extends PureComponent {
     });
   }
 
+  goDetail = item => {
+    const { dispatch } = this.props;
+    console.info(item);
+    console.info(item.id);
+    // this.props.history.push({
+    //   pathname: '../profile/basic',
+    //   state:{
+    //     id:item.id
+    //   }
+    // })
+
+    dispatch(
+      routerRedux.push({
+        pathname: '../profile/basic',
+        state: {
+          id: item.id,
+        },
+      })
+    );
+  };
   render() {
     const {
       list: { list },
@@ -152,8 +174,10 @@ class Orders extends PureComponent {
                   hoverable
                   bodyStyle={{ paddingBottom: 20 }}
                   actions={[
-                    <Tooltip title="下载">
-                      <Icon type="download" />
+                    <Tooltip title="详情">
+                      <div onClick={() => this.goDetail(item)}>
+                        <Icon type="download" />
+                      </div>
                     </Tooltip>,
                     <Tooltip title="编辑">
                       <Icon type="edit" />
