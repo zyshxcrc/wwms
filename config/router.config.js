@@ -42,10 +42,16 @@ export default [
         ],
       },
       {
-        path: '/Orders',
+        path: '/orders',
         name: 'Orders',
         icon: 'ordered-list',
-        component: './Orders/Orders',
+        routes: [
+          {
+            path: '/orders/orders',
+            name: 'Edits',
+            component: './Orders/Orders',
+          },
+        ],
       },
       {
         path: '/permission',

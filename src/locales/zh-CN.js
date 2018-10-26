@@ -22,6 +22,7 @@ export default {
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   'menu.Orders': '订单',
+  'menu.Orders.Edits': '查询列表',
   'menu.Permission': '权限',
   'menu.Permission.Users': '用户',
   'menu.Permission.Roles': '角色',
