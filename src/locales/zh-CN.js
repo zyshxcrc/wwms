@@ -23,6 +23,7 @@ export default {
   'menu.dashboard.workplace': '工作台',
   'menu.Orders': '订单',
   'menu.Orders.Edits': '查询列表',
+  'menu.Orders.DrugDetail': '详情',
   'menu.Permission': '权限',
   'menu.Permission.Users': '用户',
   'menu.Permission.Roles': '角色',

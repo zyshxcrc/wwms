@@ -1,7 +1,20 @@
 import React, { PureComponent } from 'react';
 import numeral from 'numeral';
 import { connect } from 'dva';
-import { Row, Col, Form, Card, Select, Icon, Avatar, List, Tooltip, Dropdown, Menu } from 'antd';
+import {
+  Row,
+  Col,
+  Form,
+  Card,
+  Select,
+  Icon,
+  Avatar,
+  List,
+  Tooltip,
+  Dropdown,
+  Menu,
+  Pagination,
+} from 'antd';
 import TagSelect from '@/components/TagSelect';
 import StandardFormRow from '@/components/StandardFormRow';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
@@ -57,7 +70,7 @@ class Orders extends PureComponent {
 
     dispatch(
       routerRedux.push({
-        pathname: '../profile/basic',
+        pathname: './drugDetail',
         state: {
           id: item.id,
         },
@@ -176,7 +189,7 @@ class Orders extends PureComponent {
                   actions={[
                     <Tooltip title="详情">
                       <div onClick={() => this.goDetail(item)}>
-                        <Icon type="download" />
+                        <Icon type="read" />
                       </div>
                     </Tooltip>,
                     <Tooltip title="编辑">
@@ -204,6 +217,9 @@ class Orders extends PureComponent {
               </List.Item>
             )}
           />
+          <div style={{ float: 'right' }}>
+            <Pagination showSizeChanger defaultCurrent={3} total={500} />
+          </div>
         </div>
       </PageHeaderWrapper>
     );

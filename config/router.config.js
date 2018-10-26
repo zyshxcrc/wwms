@@ -51,12 +51,19 @@ export default [
             name: 'Edits',
             component: './Orders/Orders',
           },
+          {
+            path: '/orders/drugDetail',
+            name: 'DrugDetail',
+            component: './Orders/DrugDetail',
+            hideInMenu: true,
+          },
         ],
       },
       {
         path: '/permission',
         name: 'Permission',
         icon: 'setting',
+        authority: ['admin'],
         routes: [
           {
             path: '/permission/users',
